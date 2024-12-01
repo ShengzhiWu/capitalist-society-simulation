@@ -1,32 +1,32 @@
 import java.util.Random;
 
 
-public class Product{//²úÆ·
+public class Product{//äº§å“
 	
-	int id;//±àºÅ
-	String name;//Ãû³Æ
-	boolean producible;//¿ÉÉú²úĞÔ
-	double avePrice;//Æ½¾ù¼Û¸ñ
+	int id;//ç¼–å·
+	String name;//åç§°
+	boolean producible;//å¯ç”Ÿäº§æ€§
+	double avePrice;//å¹³å‡ä»·æ ¼
 	Data price;
-	Expect expePrice;//¼Û¸ñÔ¤ÆÚ
+	Expect expePrice;//ä»·æ ¼é¢„æœŸ
 	
-	//Éè±¸
-	double equ_price;//Éè±¸¼Û¸ñ
-	int equ_productivity;//Éè±¸Éú²úÂÊ
-	double equ_loss;//(µ¥´ÎÉú²úµÄ)Éè±¸ËğºÄ
-	//Ô­²ÄÁÏ
-	double rawMat_price;//£¨µ¥Î»²úÆ·µÄ£©Ô­²ÄÁÏ¼Û¸ñ
+	//è®¾å¤‡
+	double equ_price;//è®¾å¤‡ä»·æ ¼
+	int equ_productivity;//è®¾å¤‡ç”Ÿäº§ç‡
+	double equ_loss;//(å•æ¬¡ç”Ÿäº§çš„)è®¾å¤‡æŸè€—
+	//åŸææ–™
+	double rawMat_price;//ï¼ˆå•ä½äº§å“çš„ï¼‰åŸææ–™ä»·æ ¼
 	
-	//¼ÛÖµ
-	int pro_time;//Éú²úÊ±¼ä
-	double workers_number;//Ò»Ì¨Éè±¸×÷Òµ¹¤ÈËÊı
+	//ä»·å€¼
+	int pro_time;//ç”Ÿäº§æ—¶é—´
+	double workers_number;//ä¸€å°è®¾å¤‡ä½œä¸šå·¥äººæ•°
 	
-	Product(int i1,String s1)//¹¹ÔìÆ÷
+	Product(int i1,String s1)//æ„é€ å™¨
 	{id=i1;
 	 name=s1;
 	 price=new Data();}
 	
-	void randomSet(Random ra)//Ëæ»ú³õÊ¼»¯
+	void randomSet(Random ra)//éšæœºåˆå§‹åŒ–
 	{producible=ra.nextFloat()<0.8f;
 	 if(producible)
 	 {equ_price=300d+20000d*Math.pow(ra.nextDouble(),2d);
@@ -42,29 +42,29 @@ public class Product{//²úÆ·
 	  price.randomFill(ra,avePrice*0.6d,avePrice*1.5d);}
 	 expePrice=new Expect(price,1d);}
 	
-	double addedValue()//£¨µ¥Î»²úÆ·µÄ£©¼ÛÖµÔöÖµ=Éú²úÊ±¼ä*×÷Òµ¹¤ÈËÊı(Î´¶¨)*µ¥Î»Ê±¼äÀÍ¶¯¼ÛÖµ/Éè±¸Éú²úÂÊ
+	double addedValue()//ï¼ˆå•ä½äº§å“çš„ï¼‰ä»·å€¼å¢å€¼=ç”Ÿäº§æ—¶é—´*ä½œä¸šå·¥äººæ•°(æœªå®š)*å•ä½æ—¶é—´åŠ³åŠ¨ä»·å€¼/è®¾å¤‡ç”Ÿäº§ç‡
 	{return pro_time*workers_number*Society.wor.value/equ_productivity;}
 	
-	double c()//²»±ä×Ê±¾
-	{return rawMat_price//Ô­²ÄÁÏ
-			+equ_price*equ_loss/equ_productivity;/*Éè±¸ËğºÄ*/}
+	double c()//ä¸å˜èµ„æœ¬
+	{return rawMat_price//åŸææ–™
+			+equ_price*equ_loss/equ_productivity;/*è®¾å¤‡æŸè€—*/}
 	
-	double value()//µ¥Î»²úÆ·µÄ¼ÛÖµ
-	{return c()//²»±ä×Ê±¾c
+	double value()//å•ä½äº§å“çš„ä»·å€¼
+	{return c()//ä¸å˜èµ„æœ¬c
 			+addedValue();/*v+m*/}
 	
-	double cost()//³É±¾
+	double cost()//æˆæœ¬
 	{return c()//c
 			+Society.wor.aveSalary*workers_number*pro_time/equ_productivity;/*v*/}
 	
-	double profit()//Æ½¾ùÀûÈó
+	double profit()//å¹³å‡åˆ©æ¶¦
 	{return avePrice-cost();}
 	
-	double interestRate(double ra)//Ô¤ÆÚÀûÂÊ  ¼¤½ø³Ì¶È
-	{double d1=cost();//³É±¾
+	double interestRate(double ra)//é¢„æœŸåˆ©ç‡  æ¿€è¿›ç¨‹åº¦
+	{double d1=cost();//æˆæœ¬
 	 return (expePrice.expect(ra,pro_time)-d1)/d1;}
 	
-	void countAveragePrice()//¼ÆËã¾ù¼Û£¨ÒÀ¾İ²úÁ¿¼ÓÈ¨Æ½¾ù£©
+	void countAveragePrice()//è®¡ç®—å‡ä»·ï¼ˆä¾æ®äº§é‡åŠ æƒå¹³å‡ï¼‰
 	{double d1=0d,d2=0d;
 	 int i1;
 	 Capitalist cap;
@@ -80,19 +80,19 @@ public class Product{//²úÆ·
 	 price.put(avePrice);
 	 expePrice=new Expect(price,1d);}
 	
-	void print()//´òÓ¡ĞÅÏ¢
+	void print()//æ‰“å°ä¿¡æ¯
 	{System.out.println(name);
-	 System.out.println("¿ÉÉú²úĞÔ£º"+producible);
-	 System.out.println("Æ½¾ù¼Û¸ñ£º"+avePrice);
+	 System.out.println("å¯ç”Ÿäº§æ€§ï¼š"+producible);
+	 System.out.println("å¹³å‡ä»·æ ¼ï¼š"+avePrice);
 	 if(producible)
-	 {System.out.println("Éè±¸¼Û¸ñ£º"+equ_price);
-	  System.out.println("Éè±¸Éú²úÂÊ£º"+equ_productivity);
-	  System.out.println("Éè±¸ËğºÄ£º"+equ_loss);
-	  System.out.println("Ô­²ÄÁÏ¼Û¸ñ£º"+rawMat_price);
-	  System.out.println("Éú²úÊ±¼ä£º"+pro_time);
-	  System.out.println("ËùĞè¹¤ÈËÊı£º"+workers_number);
-	  System.out.println("¼ÛÖµÔöÖµ£º"+addedValue());
-	  System.out.println("¼ÛÖµ£º"+value());}}
+	 {System.out.println("è®¾å¤‡ä»·æ ¼ï¼š"+equ_price);
+	  System.out.println("è®¾å¤‡ç”Ÿäº§ç‡ï¼š"+equ_productivity);
+	  System.out.println("è®¾å¤‡æŸè€—ï¼š"+equ_loss);
+	  System.out.println("åŸææ–™ä»·æ ¼ï¼š"+rawMat_price);
+	  System.out.println("ç”Ÿäº§æ—¶é—´ï¼š"+pro_time);
+	  System.out.println("æ‰€éœ€å·¥äººæ•°ï¼š"+workers_number);
+	  System.out.println("ä»·å€¼å¢å€¼ï¼š"+addedValue());
+	  System.out.println("ä»·å€¼ï¼š"+value());}}
 	
 	static int round(double d)
 	{return (int)(d+0.5d);}

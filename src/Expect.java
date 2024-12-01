@@ -1,14 +1,14 @@
 
-public class Expect {//Ô¤ÆÚ
+public class Expect {//é¢„æœŸ
 	
-	static double tx1=300d,tx2=80,tx3=30,tx4=8,//·ÖÎö»ù×¼Ê±¼ä³ß¶È
-				  tv1=1000d,tv2=200d,tv3=20d,tv4=4d;//·ÖÎö»ù×¼Ê±¼ä³ß¶È
+	static double tx1=300d,tx2=80,tx3=30,tx4=8,//åˆ†æåŸºå‡†æ—¶é—´å°ºåº¦
+				  tv1=1000d,tv2=200d,tv3=20d,tv4=4d;//åˆ†æåŸºå‡†æ—¶é—´å°ºåº¦
 	
-	double x1,x2,x3,x4,//½üÆÚÆ½¾ùÖµ
-		   v1,v2,v3,v4;//¸÷¸öÊ±¼ä³ß¶ÈÏÂÏßĞÔ»Ø¹éµÃµ½µÄÔö³¤ÂÊ
+	double x1,x2,x3,x4,//è¿‘æœŸå¹³å‡å€¼
+		   v1,v2,v3,v4;//å„ä¸ªæ—¶é—´å°ºåº¦ä¸‹çº¿æ€§å›å½’å¾—åˆ°çš„å¢é•¿ç‡
 	
-	Expect(Data data,double tk)//»ùÓÚÒÔÍùµÄÀëÉ¢Êı¾İ£¬¸ø³ö¶ÔÎ´À´ĞÎÊÆµÄÔ¤ÆÚ
-								  //ÒÔÍùÊı¾İ   Ê±¼ä³ß¶ÈÏµÊı£¨¶ÔÓÚ±ä»¯Æ½ÎÈµÄÁìÓòµÄÊı¾İ£¬Ó¦¶Ô¸ü³¤Ê±¼äµÄÊı¾İ½øĞĞ·ÖÎö£¬È¡½Ï´óµÄÖµ£©
+	Expect(Data data,double tk)//åŸºäºä»¥å¾€çš„ç¦»æ•£æ•°æ®ï¼Œç»™å‡ºå¯¹æœªæ¥å½¢åŠ¿çš„é¢„æœŸ
+								  //ä»¥å¾€æ•°æ®   æ—¶é—´å°ºåº¦ç³»æ•°ï¼ˆå¯¹äºå˜åŒ–å¹³ç¨³çš„é¢†åŸŸçš„æ•°æ®ï¼Œåº”å¯¹æ›´é•¿æ—¶é—´çš„æ•°æ®è¿›è¡Œåˆ†æï¼Œå–è¾ƒå¤§çš„å€¼ï¼‰
 	{int txi1,txi2,txi3,txi4,tvi1,tvi2,tvi3,tvi4;
 	 int i1,i2;
 	 double d1;
@@ -53,22 +53,22 @@ public class Expect {//Ô¤ÆÚ
 	 d1=0d;
 	 for(i2=0;i2<i1;i2++)
 		 d1+=data.get(i2);
-	 x1=d1/i1;//½üÆÚÆ½¾ùÖµ
+	 x1=d1/i1;//è¿‘æœŸå¹³å‡å€¼
 	 i1=Math.min(data.length,txi2);
 	 d1=0d;
 	 for(i2=0;i2<i1;i2++)
 		 d1+=data.get(i2);
-	 x2=d1/i1;//½üÆÚÆ½¾ùÖµ
+	 x2=d1/i1;//è¿‘æœŸå¹³å‡å€¼
 	 i1=Math.min(data.length,txi3);
 	 d1=0d;
 	 for(i2=0;i2<i1;i2++)
 		 d1+=data.get(i2);
-	 x3=d1/i1;//½üÆÚÆ½¾ùÖµ
+	 x3=d1/i1;//è¿‘æœŸå¹³å‡å€¼
 	 i1=Math.min(data.length,txi4);
 	 d1=0d;
 	 for(i2=0;i2<i1;i2++)
 		 d1+=data.get(i2);
-	 x4=d1/i1;//½üÆÚÆ½¾ùÖµ
+	 x4=d1/i1;//è¿‘æœŸå¹³å‡å€¼
 	 
 	 if(data.length<tvi1)
 		 v1=0d;
@@ -87,7 +87,7 @@ public class Expect {//Ô¤ÆÚ
 	 else
 		 v4=v(data,tvi4);}
 	
-	double expect(double ra,int time)//Ô¤ÆÚ  ¼¤½ø³Ì¶È£¨¼´¶Ô¶ÌÆÚÄÚĞÅÏ¢µÄĞÅÈÎ³Ì¶È£©£¨0~1£©
+	double expect(double ra,int time)//é¢„æœŸ  æ¿€è¿›ç¨‹åº¦ï¼ˆå³å¯¹çŸ­æœŸå†…ä¿¡æ¯çš„ä¿¡ä»»ç¨‹åº¦ï¼‰ï¼ˆ0~1ï¼‰
 	{double d1=1d-ra,
 			a1=d1*d1*d1,
 			a2=3d*d1*d1*ra,
@@ -98,7 +98,7 @@ public class Expect {//Ô¤ÆÚ
 	static int round(double d)
 	{return (int)(d+0.5d);}
 	
-	static double v(Data data,int l)//Ê¹ÓÃ×îĞ¡¶ş³Ë·¨ÇóĞ±ÂÊ  Êı¾İ  ÇóĞ±ÂÊ²¿·ÖµÄ³¤¶È
+	static double v(Data data,int l)//ä½¿ç”¨æœ€å°äºŒä¹˜æ³•æ±‚æ–œç‡  æ•°æ®  æ±‚æ–œç‡éƒ¨åˆ†çš„é•¿åº¦
 	{double d1=0d,d2=0d,d3=0d,d4=0d,d5;
 	 double x;
 	 int i1;
@@ -115,7 +115,7 @@ public class Expect {//Ô¤ÆÚ
 	 d4*=d5;//<tx>
 	 return -(d4-d1*d2)/(d3-d1*d1);}
 	
-	static double k(Data data1,Data data2,int l)//Ê¹ÓÃ×îĞ¡¶ş³Ë·¨ÇóĞ±ÂÊ  Êı¾İ£¨×Ô±äÁ¿£© Êı¾İ£¨Òò±äÁ¿£©  ÇóĞ±ÂÊ²¿·ÖµÄ³¤¶È
+	static double k(Data data1,Data data2,int l)//ä½¿ç”¨æœ€å°äºŒä¹˜æ³•æ±‚æ–œç‡  æ•°æ®ï¼ˆè‡ªå˜é‡ï¼‰ æ•°æ®ï¼ˆå› å˜é‡ï¼‰  æ±‚æ–œç‡éƒ¨åˆ†çš„é•¿åº¦
 	{double d1=0d,d2=0d,d3=0d,d4=0d,d5;
 	 double x,y;
 	 int i1;

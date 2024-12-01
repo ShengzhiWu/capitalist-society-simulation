@@ -1,23 +1,23 @@
 
-public class Produce{//ÕıÔÚ½øĞĞÖĞµÄÉú²ú
+public class Produce{//æ­£åœ¨è¿›è¡Œä¸­çš„ç”Ÿäº§
 	
-	int pro_quantity;//²úÁ¿
-	int equ_number;//Õ¼ÓÃÉè±¸Êı
-	double workers_number;//Õ¼ÓÃ¹¤ÈËÊı
-	double salary;//×Ü¹¤×Ê
+	int pro_quantity;//äº§é‡
+	int equ_number;//å ç”¨è®¾å¤‡æ•°
+	double workers_number;//å ç”¨å·¥äººæ•°
+	double salary;//æ€»å·¥èµ„
 
-	int timelength;//×ÜÊ±³¤
-	int time;//Ê£ÓàÊ±¼ä
+	int timelength;//æ€»æ—¶é•¿
+	int time;//å‰©ä½™æ—¶é—´
 	
-	Produce next;//Á´±íÏÂÒ»Ïî
+	Produce next;//é“¾è¡¨ä¸‹ä¸€é¡¹
 	
-	Produce(int i1,int i2,double d1,double d2,int i3,Produce pr1)//¹¹ÔìÆ÷  ²úÁ¿  Éè±¸Êı  ¹¤ÈËÊı  ¹¤ÈËµ¥Î»Ê±¼äÆ½¾ù¹¤×Ê  Ê±³¤  Á´±íÏÂÒ»Ïî
+	Produce(int i1,int i2,double d1,double d2,int i3,Produce pr1)//æ„é€ å™¨  äº§é‡  è®¾å¤‡æ•°  å·¥äººæ•°  å·¥äººå•ä½æ—¶é—´å¹³å‡å·¥èµ„  æ—¶é•¿  é“¾è¡¨ä¸‹ä¸€é¡¹
 	{pro_quantity=i1;
 	 equ_number=i2;
 	 workers_number=d1;
-	 //System.out.println("²úÁ¿:"+i1);
-	 //System.out.println("¹ÍÓ¶¹¤ÈËÊı:"+d1);
-	 //System.out.println("Æ½¾ù¹¤×Ê:"+d2);
+	 //System.out.println("äº§é‡:"+i1);
+	 //System.out.println("é›‡ä½£å·¥äººæ•°:"+d1);
+	 //System.out.println("å¹³å‡å·¥èµ„:"+d2);
 	 salary=d1*d2*i3;
 	 time=i3;
 	 timelength=i3;

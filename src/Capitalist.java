@@ -1,34 +1,34 @@
 import java.util.Random;
 
 
-public class Capitalist {//×Ê±¾¼Ò
+public class Capitalist {//èµ„æœ¬å®¶
 	
-	static final int cpt=30;//»ùÓÚ×î½ü¶àÉÙÌìµÄÊı¾İµ÷ÕûÊÛ¼Û
+	static final int cpt=30;//åŸºäºæœ€è¿‘å¤šå°‘å¤©çš„æ•°æ®è°ƒæ•´å”®ä»·
 	
-	int id;//±àºÅ
-	double capital;//µ±Ç°¿ÉÓÃ×Ê±¾£¨½öÏŞ»õ±Ò£©
+	int id;//ç¼–å·
+	double capital;//å½“å‰å¯ç”¨èµ„æœ¬ï¼ˆä»…é™è´§å¸ï¼‰
 	
-	//Éú²ú
-	boolean pro_participant;//ÊÇ·ñÖ±½Ó²ÎÓëÉú²ú
-	int pro_id;//Éú²úµÄ²úÆ·
-	double avaEqu_number;//µ±Ç°¿ÕÏĞÉè±¸Êı£¨ÒòÎªÉè±¸ÔÚÉú²ú¹ı³ÌÖĞ´æÔÚËğºÄ£¬ËùÒÔÎª·ÖÊı£©
-	Produce prod=null;//µ±Ç°½øĞĞÖĞµÄÉú²úÁ´±í
-	int stocks;//¿â´æÁ¿
-	double price;//¶¨¼Û
-	Data difPrice=new Data();//¼Û¸ñ²î¶î£¨¶¨¼Û-ÊĞ³¡¾ù¼Û£©
-	Data income=new Data();//µ¥¸ö½áËãÊ±¼äµãµÄ¹¤ÒµÊÕÈë
-	Expect expeIncome;//¹¤ÒµÊÕÈëÔ¤ÆÚ
+	//ç”Ÿäº§
+	boolean pro_participant;//æ˜¯å¦ç›´æ¥å‚ä¸ç”Ÿäº§
+	int pro_id;//ç”Ÿäº§çš„äº§å“
+	double avaEqu_number;//å½“å‰ç©ºé—²è®¾å¤‡æ•°ï¼ˆå› ä¸ºè®¾å¤‡åœ¨ç”Ÿäº§è¿‡ç¨‹ä¸­å­˜åœ¨æŸè€—ï¼Œæ‰€ä»¥ä¸ºåˆ†æ•°ï¼‰
+	Produce prod=null;//å½“å‰è¿›è¡Œä¸­çš„ç”Ÿäº§é“¾è¡¨
+	int stocks;//åº“å­˜é‡
+	double price;//å®šä»·
+	Data difPrice=new Data();//ä»·æ ¼å·®é¢ï¼ˆå®šä»·-å¸‚åœºå‡ä»·ï¼‰
+	Data income=new Data();//å•ä¸ªç»“ç®—æ—¶é—´ç‚¹çš„å·¥ä¸šæ”¶å…¥
+	Expect expeIncome;//å·¥ä¸šæ”¶å…¥é¢„æœŸ
 	
-	//½è´û
-	Loan loan=null;//´û¿î£¨Ïò¹¤ÈË£©Á´±í
+	//å€Ÿè´·
+	Loan loan=null;//è´·æ¬¾ï¼ˆå‘å·¥äººï¼‰é“¾è¡¨
 	
-	//Í¶»ú
-	int pro_quantity[];//³ÖÓĞ²úÆ·Á¿£¨³¤¶ÈÎª²úÆ·ÖÖÀàÊı£©
+	//æŠ•æœº
+	int pro_quantity[];//æŒæœ‰äº§å“é‡ï¼ˆé•¿åº¦ä¸ºäº§å“ç§ç±»æ•°ï¼‰
 	
-	Capitalist(int i1)//¹¹ÔìÆ÷
+	Capitalist(int i1)//æ„é€ å™¨
 	{id=i1;}
 	
-	void randomSet(Random ra)//Ëæ»ú³õÊ¼»¯
+	void randomSet(Random ra)//éšæœºåˆå§‹åŒ–
 	{capital=10000d+50000d*Math.exp(2d*ra.nextDouble());
 	 pro_participant=ra.nextFloat()<0.6f;
 	 if(pro_participant)
@@ -38,16 +38,16 @@ public class Capitalist {//×Ê±¾¼Ò
 	  avaEqu_number=ra.nextInt(50)+1-ra.nextDouble();
 	  stocks=round(capital/Society.pro[pro_id].avePrice*ra.nextDouble());}}
 	
-	void setPrice(Random ra)//ÖÆ¶¨ÊÛ¼Û£¨ÒÀ¾İÒÔÍùÏúÊÛÇé¿öµ÷ÕûÊÛ¼Û£©
+	void setPrice(Random ra)//åˆ¶å®šå”®ä»·ï¼ˆä¾æ®ä»¥å¾€é”€å”®æƒ…å†µè°ƒæ•´å”®ä»·ï¼‰
 	{//if(id==0&&difPrice.length>=cpt)
 	//	 System.out.print((float)Expect.k(difPrice,income,cpt)+",");
-	 if(difPrice.length>=cpt)//ÒÑ»ıÀÛ×ã¹»Êı¾İ£¬ÒÀ¾İÒÔÍùÊı¾İµ÷Õû
+	 if(difPrice.length>=cpt)//å·²ç§¯ç´¯è¶³å¤Ÿæ•°æ®ï¼Œä¾æ®ä»¥å¾€æ•°æ®è°ƒæ•´
 		 price*=Expect.k(difPrice,income,cpt)>0d?1d+ra.nextDouble()*0.01d:1d-ra.nextDouble()*0.01d;
-	 else//Î´»ıÀÛ×ã¹»Êı¾İ£¬ËæÒâµ÷Õû
+	 else//æœªç§¯ç´¯è¶³å¤Ÿæ•°æ®ï¼Œéšæ„è°ƒæ•´
 		 price=Society.pro[pro_id].avePrice*(ra.nextDouble()*0.2d+0.9d);
 	 difPrice.put(price);}
 	
-	void finishProduce(Produce p1)//½áÊøÒÑµ½Ê±¼äµÄÉú²ú
+	void finishProduce(Produce p1)//ç»“æŸå·²åˆ°æ—¶é—´çš„ç”Ÿäº§
 	{stocks+=p1.pro_quantity;
 	 //System.out.println("cap["+id+"].stocks+="+p1.pro_quantity);
 	 avaEqu_number+=p1.equ_number*(1d-Society.pro[pro_id].equ_loss);
@@ -55,20 +55,20 @@ public class Capitalist {//×Ê±¾¼Ò
 	 //System.out.println("wor.temIncome+="+p1.salary);
 	 }
 
-	boolean finishLoan(Loan lo1)//»ØÊÕÒÑµ½ÆÚµÄ´û¿î  ·µ»ØÊÇ·ñ»ØÊÕ³É¹¦£¨ÈôÎŞÁ¦³¥»¹Ôò»ØÊÕÊ§°Ü£¬½ö³¥»¹²¿·Ö£¬Á´±íÏî²»ÏûÊ§£©
+	boolean finishLoan(Loan lo1)//å›æ”¶å·²åˆ°æœŸçš„è´·æ¬¾  è¿”å›æ˜¯å¦å›æ”¶æˆåŠŸï¼ˆè‹¥æ— åŠ›å¿è¿˜åˆ™å›æ”¶å¤±è´¥ï¼Œä»…å¿è¿˜éƒ¨åˆ†ï¼Œé“¾è¡¨é¡¹ä¸æ¶ˆå¤±ï¼‰
 	{double d1=Math.min(lo1.value, Society.wor.money);
 	 Society.wor.money-=d1;
 	 lo1.value-=d1;
 	 capital+=d1;
 	 return lo1.value<=Society.wor.money;}
 	
-	void handleProduces()//µ¹¼ÆÊ±£¬½áÊøÒÑµ½Ê±¼äµÄÉú²ú£¬²úÆ·ÊÕÈë¿â´æ£¬»ØÊÕÉè±¸£¬¼ÆËãÉè±¸ËğºÄ£¬¹é»¹ÀÍ¶¯Á¦£¬Ö§¸¶¹¤ÈË¹¤×Ê
+	void handleProduces()//å€’è®¡æ—¶ï¼Œç»“æŸå·²åˆ°æ—¶é—´çš„ç”Ÿäº§ï¼Œäº§å“æ”¶å…¥åº“å­˜ï¼Œå›æ”¶è®¾å¤‡ï¼Œè®¡ç®—è®¾å¤‡æŸè€—ï¼Œå½’è¿˜åŠ³åŠ¨åŠ›ï¼Œæ”¯ä»˜å·¥äººå·¥èµ„
 	{Produce p1,p2;
 	 for(p1=prod;p1!=null;p1=p1.next)
 	 {Society.wor.temNumber+=p1.workers_number;
 	  Society.wor.temIncome+=p1.salary/p1.timelength;
-	  Society.wor.money+=p1.salary/p1.timelength;//¹¤×ÊÈÕ½á
-	  p1.time--;/*µ¹¼ÆÊ±*/}
+	  Society.wor.money+=p1.salary/p1.timelength;//å·¥èµ„æ—¥ç»“
+	  p1.time--;/*å€’è®¡æ—¶*/}
 	 while(prod!=null&&prod.time==0)
 	 {finishProduce(prod);
 	  prod=prod.next;}
@@ -79,14 +79,14 @@ public class Capitalist {//×Ê±¾¼Ò
 		 {finishProduce(p1);
 		  p2.next=p1.next;}}
 	
-	void handleLoans()//µ¹¼ÆÊ±£¬»ØÊÕÒÑµ½ÆÚµÄ´û¿î
+	void handleLoans()//å€’è®¡æ—¶ï¼Œå›æ”¶å·²åˆ°æœŸçš„è´·æ¬¾
 	{Loan lo1,lo2;
 	 for(lo1=loan;lo1!=null;lo1=lo1.next)
 		 lo1.time--;
 	 while(loan!=null&&loan.time==0)
 		 if(finishLoan(loan))
 			 loan=loan.next;
-		 else//ÎŞÁ¦³¥»¹
+		 else//æ— åŠ›å¿è¿˜
 			 loan.time=1;
 	 if(loan==null)
 		 return;
@@ -94,13 +94,13 @@ public class Capitalist {//×Ê±¾¼Ò
 		 if(lo1.time==0)
 			 if(finishLoan(loan))
 				 lo2.next=lo1.next;
-			 else//ÎŞÁ¦³¥»¹
+			 else//æ— åŠ›å¿è¿˜
 				 lo1.time=1;}
 	
-	void invest(Random ra)//Í¶×Ê
-	{double d1,//¹¤ÒµÉú²ú
-			d2,//½è´û
-			d3,//Í¶»ú
+	void invest(Random ra)//æŠ•èµ„
+	{double d1,//å·¥ä¸šç”Ÿäº§
+			d2,//å€Ÿè´·
+			d3,//æŠ•æœº
 			d4,d5,d6,
 			cost,
 			c;
@@ -109,21 +109,21 @@ public class Capitalist {//×Ê±¾¼Ò
 	 
 	 if(pro_participant)
 	 {pro1=Society.pro[pro_id];
-	  d1=Math.pow(pro1.interestRate(ra.nextDouble())+1d,1d/pro1.pro_time)-1d;/*¹¤ÒµÉú²úµ¥Î»Ê±¼äµÄÀûÂÊ*/
-	 //System.out.println("¹¤Òµ£º"+pro1.interestRate(0.5d));
+	  d1=Math.pow(pro1.interestRate(ra.nextDouble())+1d,1d/pro1.pro_time)-1d;/*å·¥ä¸šç”Ÿäº§å•ä½æ—¶é—´çš„åˆ©ç‡*/
+	 //System.out.println("å·¥ä¸šï¼š"+pro1.interestRate(0.5d));
 	 }
 	 else
 		 d1=0d;
 	 //if(id==0)
 	//	 System.out.print((float)d1+",");
-	 d6=Loan.interestRate(ra.nextDouble());//½è´ûÀûÂÊ
-	 d2=Math.pow(d6+1d,1d/Loan.loanTerm)-1d;//½è´ûµ¥Î»Ê±¼äµÄÀûÂÊ
-	 																		  //£¨ÒòÎª¹ıÓÚ¼¤½øµÄÀûÂÊÔ¤ÆÚ¿ÉÄÜ»á<-1£¬ËùÒÔ¿ÉÄÜ»áµÃµ½NaN£©
+	 d6=Loan.interestRate(ra.nextDouble());//å€Ÿè´·åˆ©ç‡
+	 d2=Math.pow(d6+1d,1d/Loan.loanTerm)-1d;//å€Ÿè´·å•ä½æ—¶é—´çš„åˆ©ç‡
+	 																		  //ï¼ˆå› ä¸ºè¿‡äºæ¿€è¿›çš„åˆ©ç‡é¢„æœŸå¯èƒ½ä¼š<-1ï¼Œæ‰€ä»¥å¯èƒ½ä¼šå¾—åˆ°NaNï¼‰
 	 d3=Double.NEGATIVE_INFINITY;
 	 i2=0;
-	 for(i1=0;i1<Society.pron;i1++)//Ñ°ÕÒ×î¼ÑÍ¶»ú²úÆ·£¬¼ÆËãÍ¶»úµ¥Î»Ê±¼äµÄÀûÂÊ
+	 for(i1=0;i1<Society.pron;i1++)//å¯»æ‰¾æœ€ä½³æŠ•æœºäº§å“ï¼Œè®¡ç®—æŠ•æœºå•ä½æ—¶é—´çš„åˆ©ç‡
 	 {pro2=Society.pro[i1];
-	  if(!pro2.producible)//²»¿ÉÉú²ú
+	  if(!pro2.producible)//ä¸å¯ç”Ÿäº§
 	  {d4=ra.nextDouble();
 	   d5=pro2.expePrice.expect(d4,0);
 	   d5=(pro2.expePrice.expect(d4,1)-d5)/d5;
@@ -137,71 +137,71 @@ public class Capitalist {//×Ê±¾¼Ò
 		 d2=0d;
 	 if(d3<0||!Double.isFinite(d3))
 		 d3=0d;
-	 d2=0d;/////////////////////////////////////////////ĞÅ´û½ûÖ¹
-	 d3=0d;/////////////////////////////////////////////Í¶»ú½ûÖ¹
+	 d2=0d;/////////////////////////////////////////////ä¿¡è´·ç¦æ­¢
+	 d3=0d;/////////////////////////////////////////////æŠ•æœºç¦æ­¢
 	 
 	 d4=d1+d2+d3;
-	 if(d4!=0)//ÓĞÀû¿ÉÍ¼
+	 if(d4!=0)//æœ‰åˆ©å¯å›¾
 	 {d6=d2;
 	  d4=capital/d4;
-	  d1*=d4;//¹¤ÒµÉú²úÍ¶×Ê
-	  d2*=d4;//½è´ûÍ¶×Ê
-	  d3*=d4;//Í¶»úÍ¶×Ê
+	  d1*=d4;//å·¥ä¸šç”Ÿäº§æŠ•èµ„
+	  d2*=d4;//å€Ÿè´·æŠ•èµ„
+	  d3*=d4;//æŠ•æœºæŠ•èµ„
 	  //if(pro_participant)
-		  //System.out.println("¹¤ÒµÉú²úÍ¶×Ê["+id+"]="+d1+" "+pro1.cost());
+		  //System.out.println("å·¥ä¸šç”Ÿäº§æŠ•èµ„["+id+"]="+d1+" "+pro1.cost());
 	  
-	  if(d1!=0)//¹¤ÒµÉú²úÍ¶×Ê
-	  {//System.out.println("¹¤ÒµÉú²úÍ¶×Ê£º"+d1);
+	  if(d1!=0)//å·¥ä¸šç”Ÿäº§æŠ•èµ„
+	  {//System.out.println("å·¥ä¸šç”Ÿäº§æŠ•èµ„ï¼š"+d1);
 	   cost=pro1.cost();
-	   d4=d1/cost;//Ä¿±êÉú²ú¹æÄ£
-	   d5=avaEqu_number*pro1.equ_productivity;//Éú²úÄÜÁ¦
-	   //System.out.println(" Ä¿±êÉú²ú¹æÄ££º"+d4);
-	   //System.out.println(" Éú²úÄÜÁ¦£º"+d5);
-	   if(d4>d5)//Ò»²¿·Ö×Ê½ğÓÃÓÚ¹ºÖÃĞÂÉè±¸
-	   {i1=(int)((d4-d5)*cost/pro1.equ_price);//ÓÃÓÚ¹ºÖÃĞÂÉè±¸µÄÁ¿
-	    //System.out.println("¹ºÖÃÉè±¸Êı["+id+"]="+i1);
-	    capital-=i1*pro1.equ_price;//½«×Ê±¾ÓÃÓÚ¹ºÖÃĞÂÉè±¸
-	    //Society.wor.money+=i1*pro1.equ_price;//ÎªÁË·ÀÖ¹»õ±Ò´ÓÏµÍ³Á÷³ö£¬¼Ù¶¨×Ê±¾¼Ò»¨·ÑµÄ²»±ä×Ê±¾È«²¿½øÈë¹¤ÈËÊÕÈë
+	   d4=d1/cost;//ç›®æ ‡ç”Ÿäº§è§„æ¨¡
+	   d5=avaEqu_number*pro1.equ_productivity;//ç”Ÿäº§èƒ½åŠ›
+	   //System.out.println(" ç›®æ ‡ç”Ÿäº§è§„æ¨¡ï¼š"+d4);
+	   //System.out.println(" ç”Ÿäº§èƒ½åŠ›ï¼š"+d5);
+	   if(d4>d5)//ä¸€éƒ¨åˆ†èµ„é‡‘ç”¨äºè´­ç½®æ–°è®¾å¤‡
+	   {i1=(int)((d4-d5)*cost/pro1.equ_price);//ç”¨äºè´­ç½®æ–°è®¾å¤‡çš„é‡
+	    //System.out.println("è´­ç½®è®¾å¤‡æ•°["+id+"]="+i1);
+	    capital-=i1*pro1.equ_price;//å°†èµ„æœ¬ç”¨äºè´­ç½®æ–°è®¾å¤‡
+	    //Society.wor.money+=i1*pro1.equ_price;//ä¸ºäº†é˜²æ­¢è´§å¸ä»ç³»ç»Ÿæµå‡ºï¼Œå‡å®šèµ„æœ¬å®¶èŠ±è´¹çš„ä¸å˜èµ„æœ¬å…¨éƒ¨è¿›å…¥å·¥äººæ”¶å…¥
 	    d1-=i1*pro1.equ_price;
 	    avaEqu_number+=i1;
 	    d4=d5;}
-	   i1=(int)(d4/pro1.equ_productivity);//Ä¿±ê¿ª¶¯Éè±¸Êı£¨ÓÉÓÚ¹¤ÈËÈË¾ù¹¤×ÊÓë¹ÍÓ¶¹¤ÈËÊıÕıÏà¹Ø£¬ËùÒÔÊµ¼Ê¿ª¶¯Éè±¸Êı¿ÉÄÜ»á·¢Éú±ä»¯£©
-	   //System.out.println(" Ä¿±ê¿ª¶¯Éè±¸Êı£º"+i1);
-	   c=pro1.c()*pro1.equ_productivity;//¿ª¶¯Ò»Ì¨»úÆ÷ËùĞèÒªµÄ²»±ä×Ê±¾
-	   for(;c*i1+Society.wor.salary(i1*pro1.workers_number)*i1*pro1.workers_number*pro1.pro_time<d1;i1++);//¸ù¾İÀÍ¶¯Á¦¼Û¸ñµ÷Õû¿ª¶¯Éè±¸Êı
-	   for(;(c*i1+Society.wor.salary(i1*pro1.workers_number)*i1*pro1.workers_number*pro1.pro_time>d1||i1>avaEqu_number)&&i1>0;i1--);//¸ù¾İÀÍ¶¯Á¦¼Û¸ñµ÷Õû¿ª¶¯Éè±¸Êı
-	   //System.out.println(" ¿ª¶¯Éè±¸Êı£º"+i1);
-	   capital-=c*i1+Society.wor.salary(i1*pro1.workers_number)*i1*pro1.workers_number*pro1.pro_time;//½«×Ê±¾ÓÃÓÚ½øĞĞÉú²ú
-	   Society.wor.money+=c*i1;//ÎªÁË·ÀÖ¹»õ±Ò´ÓÏµÍ³Á÷³ö£¬¼Ù¶¨×Ê±¾¼Ò»¨·ÑµÄ²»±ä×Ê±¾È«²¿½øÈë¹¤ÈËÊÕÈë
+	   i1=(int)(d4/pro1.equ_productivity);//ç›®æ ‡å¼€åŠ¨è®¾å¤‡æ•°ï¼ˆç”±äºå·¥äººäººå‡å·¥èµ„ä¸é›‡ä½£å·¥äººæ•°æ­£ç›¸å…³ï¼Œæ‰€ä»¥å®é™…å¼€åŠ¨è®¾å¤‡æ•°å¯èƒ½ä¼šå‘ç”Ÿå˜åŒ–ï¼‰
+	   //System.out.println(" ç›®æ ‡å¼€åŠ¨è®¾å¤‡æ•°ï¼š"+i1);
+	   c=pro1.c()*pro1.equ_productivity;//å¼€åŠ¨ä¸€å°æœºå™¨æ‰€éœ€è¦çš„ä¸å˜èµ„æœ¬
+	   for(;c*i1+Society.wor.salary(i1*pro1.workers_number)*i1*pro1.workers_number*pro1.pro_time<d1;i1++);//æ ¹æ®åŠ³åŠ¨åŠ›ä»·æ ¼è°ƒæ•´å¼€åŠ¨è®¾å¤‡æ•°
+	   for(;(c*i1+Society.wor.salary(i1*pro1.workers_number)*i1*pro1.workers_number*pro1.pro_time>d1||i1>avaEqu_number)&&i1>0;i1--);//æ ¹æ®åŠ³åŠ¨åŠ›ä»·æ ¼è°ƒæ•´å¼€åŠ¨è®¾å¤‡æ•°
+	   //System.out.println(" å¼€åŠ¨è®¾å¤‡æ•°ï¼š"+i1);
+	   capital-=c*i1+Society.wor.salary(i1*pro1.workers_number)*i1*pro1.workers_number*pro1.pro_time;//å°†èµ„æœ¬ç”¨äºè¿›è¡Œç”Ÿäº§
+	   Society.wor.money+=c*i1;//ä¸ºäº†é˜²æ­¢è´§å¸ä»ç³»ç»Ÿæµå‡ºï¼Œå‡å®šèµ„æœ¬å®¶èŠ±è´¹çš„ä¸å˜èµ„æœ¬å…¨éƒ¨è¿›å…¥å·¥äººæ”¶å…¥
 	   //System.out.println("c/E="+pro1.c()+"*"+pro1.equ_productivity+"="+c);
 	   //System.out.println("wor.temIncome+="+c+"*"+i1+"="+c*i1);
 	   avaEqu_number-=i1;
 	   Society.wor.avaNumber-=i1*pro1.workers_number;
-	   //System.out.println("¹ÍÓ¶¹¤ÈËÊı["+id+"]="+i1*pro1.workers_number);
-	   prod=new Produce(i1*pro1.equ_productivity,i1,i1*pro1.workers_number,Society.wor.salary(i1*pro1.workers_number),pro1.pro_time,prod);/*Í·²å½øĞĞÖĞµÄÉú²úÁ´±í*/}
+	   //System.out.println("é›‡ä½£å·¥äººæ•°["+id+"]="+i1*pro1.workers_number);
+	   prod=new Produce(i1*pro1.equ_productivity,i1,i1*pro1.workers_number,Society.wor.salary(i1*pro1.workers_number),pro1.pro_time,prod);/*å¤´æ’è¿›è¡Œä¸­çš„ç”Ÿäº§é“¾è¡¨*/}
 	  
-	  if(d2!=0)//½è´ûÍ¶×Ê
-	  {//System.out.println("½è´ûÍ¶×Ê£º"+d2);
+	  if(d2!=0)//å€Ÿè´·æŠ•èµ„
+	  {//System.out.println("å€Ÿè´·æŠ•èµ„ï¼š"+d2);
 	   d6=d2*(1+d6);
 	   capital-=d2;
 	   Society.wor.money+=d2;
-	   loan=new Loan(d6,Loan.loanTerm,loan);/*Í·²å´û¿î£¨Ïò¹¤ÈË£©Á´±íÁ´±í*/}
+	   loan=new Loan(d6,Loan.loanTerm,loan);/*å¤´æ’è´·æ¬¾ï¼ˆå‘å·¥äººï¼‰é“¾è¡¨é“¾è¡¨*/}
 	  
-	  if(d3!=0)//Í¶»úÍ¶×Ê
-	  {System.out.println("Í¶»úÍ¶×Ê£º"+d3);
+	  if(d3!=0)//æŠ•æœºæŠ•èµ„
+	  {System.out.println("æŠ•æœºæŠ•èµ„ï¼š"+d3);
 	  ///////////////////////////////////////////////////////////
 	  }}
 	 
-	 /*ÊÔÍ¼Âô³öÍ¶»úÆ·*/}
+	 /*è¯•å›¾å–å‡ºæŠ•æœºå“*/}
 	
-	void print()//´òÓ¡ĞÅÏ¢
-	{System.out.println("µ±Ç°¿ÉÓÃ×Ê±¾£º"+capital);
-	 System.out.println("ÊÇ·ñÖ±½Ó²ÎÓëÉú²ú£º"+pro_participant);
+	void print()//æ‰“å°ä¿¡æ¯
+	{System.out.println("å½“å‰å¯ç”¨èµ„æœ¬ï¼š"+capital);
+	 System.out.println("æ˜¯å¦ç›´æ¥å‚ä¸ç”Ÿäº§ï¼š"+pro_participant);
 	 if(pro_participant)
-	 {System.out.println("Éú²úµÄ²úÆ·£º"+Society.pro[pro_id].name);
-	  System.out.println("µ±Ç°¿ÕÏĞÉè±¸Êı£º"+avaEqu_number);
-	  System.out.println("¿â´æÁ¿£º"+stocks);
-	  System.out.println("¶¨¼Û£º"+price);}}
+	 {System.out.println("ç”Ÿäº§çš„äº§å“ï¼š"+Society.pro[pro_id].name);
+	  System.out.println("å½“å‰ç©ºé—²è®¾å¤‡æ•°ï¼š"+avaEqu_number);
+	  System.out.println("åº“å­˜é‡ï¼š"+stocks);
+	  System.out.println("å®šä»·ï¼š"+price);}}
 	
 	static int round(double d)
 	{return (int)(d+0.5d);}

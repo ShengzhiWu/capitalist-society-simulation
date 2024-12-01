@@ -1,30 +1,30 @@
 import java.util.Random;
 
 
-public class Workers {//¹¤ÈËÕûÌå
+public class Workers {//å·¥äººæ•´ä½“
 	
 	static final double log6=Math.log(6);
-	static double aveWorkersNumber=50;//Æ½¾ù¹ÍÓ¶¹¤ÈËÊı£¨¹ÍÓÃ´Ë¹¤ÈËÊıÊ±ÈË¾ù¹¤×Ê=Æ½¾ù¹¤×Ê£© 90
-										//¹ıµÍµÄÖµ»áµ¼ÖÂ¹¤ÈË¹¤×ÊÉÏÕÇ£¬×Ê±¾¼ÒÍ£²ú£¬¾­¼ÃÑ¸ËÙË¥ÍË
-										//¹ı¸ßµÄÖµ»áµ¼ÖÂ¾­¼ÃÔÚ´óÊ±¼ä³ß¶ÈÏÂË¥ÍË
+	static double aveWorkersNumber=50;//å¹³å‡é›‡ä½£å·¥äººæ•°ï¼ˆé›‡ç”¨æ­¤å·¥äººæ•°æ—¶äººå‡å·¥èµ„=å¹³å‡å·¥èµ„ï¼‰ 90
+										//è¿‡ä½çš„å€¼ä¼šå¯¼è‡´å·¥äººå·¥èµ„ä¸Šæ¶¨ï¼Œèµ„æœ¬å®¶åœäº§ï¼Œç»æµè¿…é€Ÿè¡°é€€
+										//è¿‡é«˜çš„å€¼ä¼šå¯¼è‡´ç»æµåœ¨å¤§æ—¶é—´å°ºåº¦ä¸‹è¡°é€€
 	
-	double number;//¹¤ÈË×ÜÁ¿
-	double avaNumber;//µ±Ç°¿ÉÓÃ¹¤ÈËÁ¿
-	double value=170;//Ò»¸ö¹¤ÈËµ¥Î»Ê±¼ä´´ÔìµÄ¼ÛÖµ
-	double minSalary;//£¨µ¥¸ö¹¤ÈËµ¥Î»Ê±¼ä£©Ô¸Òâ½ÓÊÜµÄ×îµÍ¹¤×Ê
-	double aveSalary;//ÈË¾ù¹¤×Ê£¨½öÏŞÓĞÊÕÈëµÄÈË£©
-	Data income=new Data();//ÒÔÍùÊÕÈë
-	Expect expeIncome;//ÊÕÈëÔ¤ÆÚ
-	double temIncome;//µ¥´ÎµÄÊÕÈë£¨²»°üÀ¨¹¤Òµ×Ê±¾¼Ò²É¹ºÔ­ÁÏµÄ»¨·Ñ£¬¾¡¹ÜÕâ²¿·Ö»¨·Ñ½øÈëÁË¹¤ÈËÖ§¸¶Á¦£©
-	double temNumber;//µ¥´Î»ñµÃ¹¤×ÊµÄ¹¤ÈËÊı³Ë¹¤×÷Ê±³¤
-	double money;//µ±Ç°Ö§¸¶Á¦
+	double number;//å·¥äººæ€»é‡
+	double avaNumber;//å½“å‰å¯ç”¨å·¥äººé‡
+	double value=170;//ä¸€ä¸ªå·¥äººå•ä½æ—¶é—´åˆ›é€ çš„ä»·å€¼
+	double minSalary;//ï¼ˆå•ä¸ªå·¥äººå•ä½æ—¶é—´ï¼‰æ„¿æ„æ¥å—çš„æœ€ä½å·¥èµ„
+	double aveSalary;//äººå‡å·¥èµ„ï¼ˆä»…é™æœ‰æ”¶å…¥çš„äººï¼‰
+	Data income=new Data();//ä»¥å¾€æ”¶å…¥
+	Expect expeIncome;//æ”¶å…¥é¢„æœŸ
+	double temIncome;//å•æ¬¡çš„æ”¶å…¥ï¼ˆä¸åŒ…æ‹¬å·¥ä¸šèµ„æœ¬å®¶é‡‡è´­åŸæ–™çš„èŠ±è´¹ï¼Œå°½ç®¡è¿™éƒ¨åˆ†èŠ±è´¹è¿›å…¥äº†å·¥äººæ”¯ä»˜åŠ›ï¼‰
+	double temNumber;//å•æ¬¡è·å¾—å·¥èµ„çš„å·¥äººæ•°ä¹˜å·¥ä½œæ—¶é•¿
+	double money;//å½“å‰æ”¯ä»˜åŠ›
 	
-	//ËùĞè
-	double[] demand=new double[Society.pron];//£¨µ¥Î»Ê±¼ä£©ĞèÇóÁ¿
-	double[] pay_rate=new double[Society.pron];//ÆÚÍûµÄÖ§³öÕ¼±È£¨»áËæÒÔÍùÊµ¼ÊÖ§³öÕ¼±È»ºÂı±ä»¯£©
-	double[] demand_elasticity=new double[Society.pron];//ĞèÇóµ¯ĞÔ£¨0~1£©£¨¾ö²ßÓÉĞèÇóÁ¿Æ«ÏòÖ§³öÆÚÍûµÄ³Ì¶È£©
+	//æ‰€éœ€
+	double[] demand=new double[Society.pron];//ï¼ˆå•ä½æ—¶é—´ï¼‰éœ€æ±‚é‡
+	double[] pay_rate=new double[Society.pron];//æœŸæœ›çš„æ”¯å‡ºå æ¯”ï¼ˆä¼šéšä»¥å¾€å®é™…æ”¯å‡ºå æ¯”ç¼“æ…¢å˜åŒ–ï¼‰
+	double[] demand_elasticity=new double[Society.pron];//éœ€æ±‚å¼¹æ€§ï¼ˆ0~1ï¼‰ï¼ˆå†³ç­–ç”±éœ€æ±‚é‡åå‘æ”¯å‡ºæœŸæœ›çš„ç¨‹åº¦ï¼‰
 	
-	void setNeed(Random ra)//ĞèÇóËæ»ú³õÊ¼»¯£¨»ùÓÚµ±Ç°×Ü²úÁ¿£©
+	void setNeed(Random ra)//éœ€æ±‚éšæœºåˆå§‹åŒ–ï¼ˆåŸºäºå½“å‰æ€»äº§é‡ï¼‰
 	{int i1,pro_id;
 	 double d1;
 	 for(i1=0;i1<Society.capn;i1++)
@@ -40,10 +40,10 @@ public class Workers {//¹¤ÈËÕûÌå
 	 for(i1=0;i1<Society.pron;i1++)
 	 {pay_rate[i1]*=d1;}}
 	
-	double salary(double wn)//ÈË¾ù¹¤×Ê  µ¥¸ö×Ê±¾¼Ò¹ÍÓ¶¹¤ÈËÊı
+	double salary(double wn)//äººå‡å·¥èµ„  å•ä¸ªèµ„æœ¬å®¶é›‡ä½£å·¥äººæ•°
 	{return minSalary+(aveSalary-minSalary)*Math.log(5d*wn/aveWorkersNumber+1d)/log6;}
 	
-	void countIncome()//¼ÆËãÊÕÈë
+	void countIncome()//è®¡ç®—æ”¶å…¥
 	{if(temNumber!=0d)
 		 aveSalary=temIncome/temNumber;
 	 //System.out.print(aveSalary+"="+temIncome+"/"+temNumber+",");
@@ -52,7 +52,7 @@ public class Workers {//¹¤ÈËÕûÌå
 	 temNumber=0d;
 	 expeIncome=new Expect(income,1d);}
 	
-	void buy()//Ïû·Ñ
+	void buy()//æ¶ˆè´¹
 	{double[] da1=new double[Society.pron],
 			  da2=new double[Society.pron],
 			  da3=new double[Society.pron];
@@ -72,9 +72,9 @@ public class Workers {//¹¤ÈËÕûÌå
 		  da1[i1]*=d1;}
 
 	 d2=0d;
-	 for(i1=0;i1<Society.pron;i1++)//¹ºÂò
+	 for(i1=0;i1<Society.pron;i1++)//è´­ä¹°
 	 {need=(int)((da1[i1]*(1d-demand_elasticity[i1])+da2[i1]*demand_elasticity[i1])/Society.pro[i1].avePrice);
-	  da3[i1]=need*Society.pro[i1].avePrice;//¸ÃÏîÖ§³ö
+	  da3[i1]=need*Society.pro[i1].avePrice;//è¯¥é¡¹æ”¯å‡º
 	  d2+=da3[i1];
 	  i2=0;
 	  for(i3=0;i3<Society.capn;i3++)
@@ -84,7 +84,7 @@ public class Workers {//¹¤ÈËÕûÌå
 		  continue;
 	  sortCapitalists(capa,i2);
 	  for(i3=0;i3<i2;i3++)
-		  if(capa[i3].stocks<need)//²»¹»
+		  if(capa[i3].stocks<need)//ä¸å¤Ÿ
 		  {d1=capa[i3].stocks*capa[i3].price;
 		   capa[i3].income.put(d1);
 		   money-=d1;
@@ -92,7 +92,7 @@ public class Workers {//¹¤ÈËÕûÌå
 		   need-=capa[i3].stocks;
 		   //System.out.println("cap["+capa[i3].id+"].stocks-="+capa[i3].stocks);
 		   capa[i3].stocks=0;}
-		  else//¹»ÁË
+		  else//å¤Ÿäº†
 		  {d1=need*capa[i3].price;
 		   capa[i3].income.put(d1);
 		   money-=d1;
@@ -101,22 +101,22 @@ public class Workers {//¹¤ÈËÕûÌå
 		   capa[i3].stocks-=need;
 		   need=0;
 		   break;}
-	  for(i3++;i3<i2;i3++)//¼Û¸ñ¹ı¸ß£¬ÎŞÈË¹ºÂò£¬ÊÕÈëÎª0
+	  for(i3++;i3<i2;i3++)//ä»·æ ¼è¿‡é«˜ï¼Œæ— äººè´­ä¹°ï¼Œæ”¶å…¥ä¸º0
 		  capa[i3].income.put(0d);
 	  for(i3++;i3<i2;i3++)
 		  capa[i3].expeIncome=new Expect(capa[i3].income,1d);}
 	 d2=1d/d2;
-	 for(i1=0;i1<Society.pron;i1++)//Êµ¼ÊÖ§³ö±ÈÀı
+	 for(i1=0;i1<Society.pron;i1++)//å®é™…æ”¯å‡ºæ¯”ä¾‹
 		 da3[i1]*=d2;
-	 for(i1=0;i1<Society.pron;i1++)//Ö§³öÔ¤ÆÚÏòÊµ¼ÊÖ§³öÆ«ÒÆ
+	 for(i1=0;i1<Society.pron;i1++)//æ”¯å‡ºé¢„æœŸå‘å®é™…æ”¯å‡ºåç§»
 		 pay_rate[i1]+=(da3[i1]-pay_rate[i1])*0.02d;}
 	
-	void sortCapitalists(Capitalist[] capa,int l)//°´ÊÛ¼ÛµİÔöµÄË³ĞòÅÅÁĞ×Ê±¾¼Ò
+	void sortCapitalists(Capitalist[] capa,int l)//æŒ‰å”®ä»·é€’å¢çš„é¡ºåºæ’åˆ—èµ„æœ¬å®¶
 	{int i1,i2;
 	 boolean bo1;
 	 Capitalist cap;
 	 
-	 for(i1=l-1;i1>0;i1--)//Ã°ÅİÅÅĞò
+	 for(i1=l-1;i1>0;i1--)//å†’æ³¡æ’åº
 	 {bo1=true;
 	  for(i2=0;i2<i1;i2++)
 		  if(capa[i2].price>capa[i2+1].price)
@@ -127,19 +127,19 @@ public class Workers {//¹¤ÈËÕûÌå
 	  if(bo1)
 		  break;}}
 	
-	void print()//´òÓ¡ĞÅÏ¢
-	{System.out.println("¹¤ÈË×ÜÁ¿£º"+number);
-	 System.out.println("µ±Ç°¿ÉÓÃ¹¤ÈËÁ¿£º"+avaNumber);
-	 System.out.println("Ò»¸ö¹¤ÈËµ¥Î»Ê±¼ä´´ÔìµÄ¼ÛÖµ£º"+value);
-	 System.out.println("Ô¸Òâ½ÓÊÜµÄ×îµÍ¹¤×Ê£º"+minSalary);
-	 System.out.println("µ±Ç°Ö§¸¶Á¦£º"+money);}
+	void print()//æ‰“å°ä¿¡æ¯
+	{System.out.println("å·¥äººæ€»é‡ï¼š"+number);
+	 System.out.println("å½“å‰å¯ç”¨å·¥äººé‡ï¼š"+avaNumber);
+	 System.out.println("ä¸€ä¸ªå·¥äººå•ä½æ—¶é—´åˆ›é€ çš„ä»·å€¼ï¼š"+value);
+	 System.out.println("æ„¿æ„æ¥å—çš„æœ€ä½å·¥èµ„ï¼š"+minSalary);
+	 System.out.println("å½“å‰æ”¯ä»˜åŠ›ï¼š"+money);}
 	
-	void printNeed()//´òÓ¡ĞèÇóĞÅÏ¢
+	void printNeed()//æ‰“å°éœ€æ±‚ä¿¡æ¯
 	{int i1;
 	 for(i1=0;i1<Society.pron;i1++)
 	 {System.out.println(Society.pro[i1].name);
-	  System.out.println("  ĞèÇóÁ¿£º"+demand[i1]);
+	  System.out.println("  éœ€æ±‚é‡ï¼š"+demand[i1]);
 	  if(Society.pro[i1].producible)
-	  {System.out.println("  ÆÚÍûµÄÖ§³öÕ¼±È£º"+pay_rate[i1]);
-	   System.out.println("  ĞèÇóµ¯ĞÔ£º"+demand_elasticity[i1]);}}}
+	  {System.out.println("  æœŸæœ›çš„æ”¯å‡ºå æ¯”ï¼š"+pay_rate[i1]);
+	   System.out.println("  éœ€æ±‚å¼¹æ€§ï¼š"+demand_elasticity[i1]);}}}
 }

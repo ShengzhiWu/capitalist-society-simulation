@@ -1,14 +1,14 @@
 import java.util.Random;
 
 
-public class Data{//Êı¾İ¼ÇÂ¼£¨Ñ­»·Ê¹ÓÃÒ»¸öÊı×é£©
+public class Data{//æ•°æ®è®°å½•ï¼ˆå¾ªç¯ä½¿ç”¨ä¸€ä¸ªæ•°ç»„ï¼‰
 	static final int maxlength=1000;
 	
 	private double[] array=new double[maxlength];
-	int length=0;//ÒÑ¼ÇÂ¼µÄÊı¾İ³¤¶È
-	private int p=maxlength-1;//µ±Ç°Ö¸ÕëÎ»ÖÃ£¨Ö¸×Åµ±Ç°×îĞÂµÄÊı¾İ£©
+	int length=0;//å·²è®°å½•çš„æ•°æ®é•¿åº¦
+	private int p=maxlength-1;//å½“å‰æŒ‡é’ˆä½ç½®ï¼ˆæŒ‡ç€å½“å‰æœ€æ–°çš„æ•°æ®ï¼‰
 	
-	void put(double d1)//´æÒ»¸öÊı¾İ
+	void put(double d1)//å­˜ä¸€ä¸ªæ•°æ®
 	{p++;
 	 if(p>=maxlength)
 		 p=0;
@@ -16,19 +16,19 @@ public class Data{//Êı¾İ¼ÇÂ¼£¨Ñ­»·Ê¹ÓÃÒ»¸öÊı×é£©
 	 if(length<maxlength)
 		 length++;}
 	
-	double get(int index)//È¡Ò»¸öÊı¾İ
+	double get(int index)//å–ä¸€ä¸ªæ•°æ®
 	{if(p>=index)
 		 return array[p-index];
 	 else
 		 return array[maxlength-(index-p)];}
 	
-	void fill(double d1)//Ìî³äÊı¾İ£¬ÓÃÓÚ³õÊ¼»¯Ê±Î±ÔìÀúÊ·
+	void fill(double d1)//å¡«å……æ•°æ®ï¼Œç”¨äºåˆå§‹åŒ–æ—¶ä¼ªé€ å†å²
 	{int i1;
 	 for(i1=0;i1<maxlength;i1++)
 		 array[i1]=d1;
 	 length=maxlength;}
 	
-	void randomFill(Random ra,double d1,double d2)//Ëæ»úÌî³äÊı¾İ£¬ÓÃÓÚ³õÊ¼»¯Ê±Î±ÔìÀúÊ·  Ëæ»úÊı·¢ÉúÆ÷  ×îĞ¡Öµ  ×î´óÖµ
+	void randomFill(Random ra,double d1,double d2)//éšæœºå¡«å……æ•°æ®ï¼Œç”¨äºåˆå§‹åŒ–æ—¶ä¼ªé€ å†å²  éšæœºæ•°å‘ç”Ÿå™¨  æœ€å°å€¼  æœ€å¤§å€¼
 	{int i1;
 	 d2-=d1;
 	 for(i1=0;i1<maxlength;i1++)

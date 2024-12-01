@@ -1,17 +1,17 @@
 import java.util.Random;
 
 
-public class Society {//Éç»á
+public class Society {//ç¤¾ä¼š
 	
-	static final int pron=3;//²úÆ·ÖÖÀàÊı
-	static Product[] pro=new Product[pron];//²úÆ·
-	static final int capn=10;//×Ê±¾¼Ò¸öÊı
-	static Capitalist[] cap=new Capitalist[capn];//×Ê±¾¼Ò
-	static Workers wor=new Workers();//¹¤ÈË
+	static final int pron=3;//äº§å“ç§ç±»æ•°
+	static Product[] pro=new Product[pron];//äº§å“
+	static final int capn=10;//èµ„æœ¬å®¶ä¸ªæ•°
+	static Capitalist[] cap=new Capitalist[capn];//èµ„æœ¬å®¶
+	static Workers wor=new Workers();//å·¥äºº
 	
-	static double aveInterestRates;//Æ½¾ùÀûÂÊ
+	static double aveInterestRates;//å¹³å‡åˆ©ç‡
 	
-	static Random ra;//Ëæ»úÊı·¢ÉúÆ÷
+	static Random ra;//éšæœºæ•°å‘ç”Ÿå™¨
 	
 	public static void main(String args[])
 	{
@@ -28,14 +28,14 @@ public class Society {//Éç»á
 		System.out.println(new Expect(d,1d).expect(0.5d, 4));
 		System.exit(0);*/
 		
-		ra=new Random(3);//²úÆ·³õÊ¼»¯
+		ra=new Random(3);//äº§å“åˆå§‹åŒ–
 		for(i1=0;i1<pron;i1++)
-		{pro[i1]=new Product(i1,"²úÆ·"+(char)('A'+i1));
+		{pro[i1]=new Product(i1,"äº§å“"+(char)('A'+i1));
 		 pro[i1].randomSet(ra);
 		 pro[i1].print();
 		 System.out.println();}
 		
-		ra=new Random(16);//×Ê±¾¼Ò³õÊ¼»¯
+		ra=new Random(16);//èµ„æœ¬å®¶åˆå§‹åŒ–
 		for(i1=0;i1<capn;i1++)
 		{cap[i1]=new Capitalist(i1);
 		 cap[i1].randomSet(ra);
@@ -43,7 +43,7 @@ public class Society {//Éç»á
 		 cap[i1].print();
 		 System.out.println();}
 		
-		ra=new Random(16);//¹¤ÈËÕûÌå³õÊ¼»¯ 16
+		ra=new Random(16);//å·¥äººæ•´ä½“åˆå§‹åŒ– 16
 		wor.number=0d;
 		wor.money=0d;
 		for(i1=0;i1<capn;i1++)
@@ -52,7 +52,7 @@ public class Society {//Éç»á
 		 wor.number+=cap[i1].avaEqu_number*pro[cap[i1].pro_id].workers_number;
 		 wor.money+=cap[i1].avaEqu_number*pro[cap[i1].pro_id].equ_productivity*(pro[cap[i1].pro_id].avePrice-pro[cap[i1].pro_id].c())/pro[cap[i1].pro_id].pro_time;}
 		wor.aveSalary=wor.money/wor.number*0.7d;
-		wor.number*=2d;//¹¤ÈËÓ¯Óà
+		wor.number*=2d;//å·¥äººç›ˆä½™
 		wor.avaNumber=wor.number;
 		wor.minSalary=wor.value*0.3d;
 		wor.income.randomFill(ra,wor.money*0.8d,wor.money*1.2d);
@@ -70,18 +70,18 @@ public class Society {//Éç»á
 		 System.out.print(cap[0].stocks+",");
 		 for(i2=0;i2<capn;i2++)
 		 {if(cap[i2].pro_participant)
-		  {cap[i2].setPrice(ra);//¹¤Òµ×Ê±¾¼ÒÖÆ¶¨ÊÛ¼Û
+		  {cap[i2].setPrice(ra);//å·¥ä¸šèµ„æœ¬å®¶åˆ¶å®šå”®ä»·
 		   cap[i2].handleProduces();}
 		  cap[i2].handleLoans();
-		  cap[i2].invest(ra);}//×Ê±¾¼ÒÍ¶×Ê
+		  cap[i2].invest(ra);}//èµ„æœ¬å®¶æŠ•èµ„
 		 for(i2=0;i2<pron;i2++)
-			 pro[i2].countAveragePrice();//ÖØËãÊĞ³¡¾ù¼Û
+			 pro[i2].countAveragePrice();//é‡ç®—å¸‚åœºå‡ä»·
 		 //System.out.print((float)cap[0].price+",");
 		 //System.out.print((float)wor.temNumber+",");
 		 wor.countIncome();
 		 //System.out.print((float)wor.aveSalary+",");
 		 //System.out.print((float)wor.money+",");
-		 wor.buy();//¹¤ÈËÏû·Ñ
+		 wor.buy();//å·¥äººæ¶ˆè´¹
 		 //System.out.println();
 		 }
 		

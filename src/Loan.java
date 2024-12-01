@@ -1,20 +1,20 @@
 
-public class Loan {//´û¿î£¨Ïò¹¤ÈË£©
+public class Loan {//è´·æ¬¾ï¼ˆå‘å·¥äººï¼‰
 
-	static int loanTerm=240;//´û¿îÆÚÏŞ
+	static int loanTerm=240;//è´·æ¬¾æœŸé™
 	
-	double value;//Ó¦¹é»¹Á¿£¨Á¬±¾´øÏ¢£©
+	double value;//åº”å½’è¿˜é‡ï¼ˆè¿æœ¬å¸¦æ¯ï¼‰
 	
-	int time;//Ê£ÓàÊ±¼ä
+	int time;//å‰©ä½™æ—¶é—´
 	
-	Loan next;//Á´±íÏÂÒ»Ïî
+	Loan next;//é“¾è¡¨ä¸‹ä¸€é¡¹
 	
-	Loan(double d1,int i1,Loan lo1)//¹¹ÔìÆ÷
+	Loan(double d1,int i1,Loan lo1)//æ„é€ å™¨
 	{value=d1;
 	 time=i1;
 	 next=lo1;}
 	
-	static double interestRate(double ra)//ÀûÂÊ  ¼¤½ø³Ì¶È
+	static double interestRate(double ra)//åˆ©ç‡  æ¿€è¿›ç¨‹åº¦
 	{double d1=Society.wor.expeIncome.expect(ra,0);
 	 return (Society.wor.expeIncome.expect(ra,loanTerm)-d1)/d1;}
 }

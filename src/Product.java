@@ -20,14 +20,14 @@ public class Product {  // 产品
 	int pro_time;  // 生产时间
 	double workers_number;  // 一台设备作业工人数
 
-	Product(int i1, String s1)  // 构造器
+	public Product(int i1, String s1)  // 构造器
 	{
 		id = i1;
 		name = s1;
 		price = new Data();
 	}
 
-	void randomSet(Society society, Random ra)  // 随机初始化
+	void initialize(Society society, Random ra)  // 随机初始化
 	{
 		producible = ra.nextFloat() < 0.8f;
 		if (producible) {

@@ -16,7 +16,7 @@ public class Society {  // 社会
 		this.wor = new Workers(this);
 	}
 
-	public void run() {
+	public void run(int steps) {
 		int i1, i2;
 
 		  //
@@ -35,7 +35,7 @@ public class Society {  // 社会
 		ra = new Random(3);  // 产品初始化
 		for (i1 = 0; i1 < pron; i1++) {
 			pro[i1] = new Product(i1, "产品" + (char) ('A' + i1));
-			pro[i1].randomSet(this, ra);
+			pro[i1].initialize(this, ra);
 			pro[i1].print(this);
 			System.out.println();
 		}
@@ -43,7 +43,7 @@ public class Society {  // 社会
 		ra = new Random(16);  // 资本家初始化
 		for (i1 = 0; i1 < capn; i1++) {
 			cap[i1] = new Capitalist(i1);
-			cap[i1].randomSet(this, ra);
+			cap[i1].initialize(this, ra);
 			cap[i1].setPrice(this, ra);
 			cap[i1].print(this);
 			System.out.println();
@@ -71,7 +71,7 @@ public class Society {  // 社会
 		System.out.println();
 
 		ra = new Random(5);
-		for (i1 = 0; i1 < 1000; i1++) {  // System.out.print((float)pro[0].avePrice+",");
+		for (i1 = 0; i1 < steps; i1++) {  // System.out.print((float)pro[0].avePrice+",");
 										  // System.out.print((float)cap[0].capital+",");
 										  // System.out.print((float)cap[0].avaEqu_number+",");
 			System.out.print(cap[0].stocks + ",");

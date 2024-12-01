@@ -11,7 +11,7 @@ public class Produce {  // 正在进行中的生产
 
 	Produce next;  // 链表下一项
 
-	Produce(int i1, int i2, double d1, double d2, int i3, Produce pr1)  // 构造器 产量 设备数 工人数 工人单位时间平均工资 时长 链表下一项
+	public Produce(int i1, int i2, double d1, double d2, int i3, Produce pr1)  // 构造器 产量 设备数 工人数 工人单位时间平均工资 时长 链表下一项
 	{
 		pro_quantity = i1;
 		equ_number = i2;

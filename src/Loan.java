@@ -9,7 +9,7 @@ public class Loan {  // 贷款（向工人）
 
 	Loan next;  // 链表下一项
 
-	Loan(double d1, int i1, Loan lo1)  // 构造器
+	public Loan(double d1, int i1, Loan lo1)  // 构造器
 	{
 		value = d1;
 		time = i1;

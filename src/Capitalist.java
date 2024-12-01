@@ -24,12 +24,12 @@ public class Capitalist {  // 资本家
 	  // 投机
 	int pro_quantity[];  // 持有产品量（长度为产品种类数）
 
-	Capitalist(int i1)  // 构造器
+	public Capitalist(int i1)  // 构造器
 	{
 		id = i1;
 	}
 
-	void randomSet(Society society, Random ra)  // 随机初始化
+	void initialize(Society society, Random ra)  // 随机初始化
 	{
 		capital = 10000d + 50000d * Math.exp(2d * ra.nextDouble());
 		pro_participant = ra.nextFloat() < 0.6f;

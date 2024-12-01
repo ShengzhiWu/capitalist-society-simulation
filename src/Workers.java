@@ -19,28 +19,35 @@ public class Workers {  // 工人整体
 	double money;  // 当前支付力
 
 	  // 所需
-	double[] demand = new double[Society.pron];  // （单位时间）需求量
-	double[] pay_rate = new double[Society.pron];  // 期望的支出占比（会随以往实际支出占比缓慢变化）
-	double[] demand_elasticity = new double[Society.pron];  // 需求弹性（0~1）（决策由需求量偏向支出期望的程度）
+	double[] demand;  // （单位时间）需求量
+	double[] pay_rate;  // 期望的支出占比（会随以往实际支出占比缓慢变化）
+	double[] demand_elasticity;  // 需求弹性（0~1）（决策由需求量偏向支出期望的程度）
 
-	void setNeed(Random ra)  // 需求随机初始化（基于当前总产量）
+	public Workers(Society society)
+	{
+		this.demand = new double[society.pron];  // （单位时间）需求量
+		this.pay_rate = new double[society.pron];  // 期望的支出占比（会随以往实际支出占比缓慢变化）
+		this.demand_elasticity = new double[society.pron];
+	}
+
+	void setNeed(Society society, Random ra)  // 需求随机初始化（基于当前总产量）
 	{
 		int i1, pro_id;
 		double d1;
-		for (i1 = 0; i1 < Society.capn; i1++)
-			if (Society.cap[i1].pro_participant) {
-				pro_id = Society.cap[i1].pro_id;
-				demand[pro_id] += (double) Society.cap[i1].avaEqu_number * Society.pro[pro_id].equ_productivity
-						/ Society.pro[pro_id].pro_time;
+		for (i1 = 0; i1 < society.capn; i1++)
+			if (society.cap[i1].pro_participant) {
+				pro_id = society.cap[i1].pro_id;
+				demand[pro_id] += (double) society.cap[i1].avaEqu_number * society.pro[pro_id].equ_productivity
+						/ society.pro[pro_id].pro_time;
 			}
 		d1 = 0d;
-		for (i1 = 0; i1 < Society.pron; i1++) {
-			pay_rate[i1] = demand[i1] * Society.pro[i1].avePrice;
+		for (i1 = 0; i1 < society.pron; i1++) {
+			pay_rate[i1] = demand[i1] * society.pro[i1].avePrice;
 			d1 += pay_rate[i1];
 			demand_elasticity[i1] = ra.nextDouble();
 		}
 		d1 = 1d / d1;
-		for (i1 = 0; i1 < Society.pron; i1++) {
+		for (i1 = 0; i1 < society.pron; i1++) {
 			pay_rate[i1] *= d1;
 		}
 	}
@@ -61,39 +68,39 @@ public class Workers {  // 工人整体
 		expeIncome = new Expect(income, 1d);
 	}
 
-	void buy()  // 消费
+	void buy(Society society)  // 消费
 	{
-		double[] da1 = new double[Society.pron],
-				da2 = new double[Society.pron],
-				da3 = new double[Society.pron];
-		Capitalist[] capa = new Capitalist[Society.capn];
+		double[] da1 = new double[society.pron],
+				da2 = new double[society.pron],
+				da3 = new double[society.pron];
+		Capitalist[] capa = new Capitalist[society.capn];
 		int i1, i2, i3,
 				need;
 		double d1, d2;
 
 		d1 = 0d;
-		for (i1 = 0; i1 < Society.pron; i1++) {
-			da1[i1] = demand[i1] * Society.pro[i1].avePrice;
+		for (i1 = 0; i1 < society.pron; i1++) {
+			da1[i1] = demand[i1] * society.pro[i1].avePrice;
 			d1 += da1[i1];
 			da2[i1] = pay_rate[i1] * money;
 		}
 		if (d1 > money) {
 			d1 = money / d1;
-			for (i1 = 0; i1 < Society.pron; i1++)
+			for (i1 = 0; i1 < society.pron; i1++)
 				da1[i1] *= d1;
 		}
 
 		d2 = 0d;
-		for (i1 = 0; i1 < Society.pron; i1++)  // 购买
+		for (i1 = 0; i1 < society.pron; i1++)  // 购买
 		{
 			need = (int) ((da1[i1] * (1d - demand_elasticity[i1]) + da2[i1] * demand_elasticity[i1])
-					/ Society.pro[i1].avePrice);
-			da3[i1] = need * Society.pro[i1].avePrice;  // 该项支出
+					/ society.pro[i1].avePrice);
+			da3[i1] = need * society.pro[i1].avePrice;  // 该项支出
 			d2 += da3[i1];
 			i2 = 0;
-			for (i3 = 0; i3 < Society.capn; i3++)
-				if (Society.cap[i3].pro_participant && Society.cap[i3].pro_id == i1)
-					capa[i2++] = Society.cap[i3];
+			for (i3 = 0; i3 < society.capn; i3++)
+				if (society.cap[i3].pro_participant && society.cap[i3].pro_id == i1)
+					capa[i2++] = society.cap[i3];
 			if (i2 == 0)
 				continue;
 			sortCapitalists(capa, i2);
@@ -124,9 +131,9 @@ public class Workers {  // 工人整体
 				capa[i3].expeIncome = new Expect(capa[i3].income, 1d);
 		}
 		d2 = 1d / d2;
-		for (i1 = 0; i1 < Society.pron; i1++)  // 实际支出比例
+		for (i1 = 0; i1 < society.pron; i1++)  // 实际支出比例
 			da3[i1] *= d2;
-		for (i1 = 0; i1 < Society.pron; i1++)  // 支出预期向实际支出偏移
+		for (i1 = 0; i1 < society.pron; i1++)  // 支出预期向实际支出偏移
 			pay_rate[i1] += (da3[i1] - pay_rate[i1]) * 0.02d;
 	}
 
@@ -160,13 +167,13 @@ public class Workers {  // 工人整体
 		System.out.println("当前支付力：" + money);
 	}
 
-	void printNeed()  // 打印需求信息
+	void printNeed(Society society)  // 打印需求信息
 	{
 		int i1;
-		for (i1 = 0; i1 < Society.pron; i1++) {
-			System.out.println(Society.pro[i1].name);
+		for (i1 = 0; i1 < society.pron; i1++) {
+			System.out.println(society.pro[i1].name);
 			System.out.println("  需求量：" + demand[i1]);
-			if (Society.pro[i1].producible) {
+			if (society.pro[i1].producible) {
 				System.out.println("  期望的支出占比：" + pay_rate[i1]);
 				System.out.println("  需求弹性：" + demand_elasticity[i1]);
 			}

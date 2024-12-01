@@ -27,7 +27,7 @@ public class Product {  // 产品
 		price = new Data();
 	}
 
-	void randomSet(Random ra)  // 随机初始化
+	void randomSet(Society society, Random ra)  // 随机初始化
 	{
 		producible = ra.nextFloat() < 0.8f;
 		if (producible) {
@@ -37,7 +37,7 @@ public class Product {  // 产品
 			rawMat_price = Math.exp(9d * ra.nextDouble());
 			pro_time = round(0.1d * Math.exp(9d * ra.nextDouble()) + 3d);
 			workers_number = 6d * Math.exp(1.7d * ra.nextDouble());
-			avePrice = value();
+			avePrice = value(society);
 			price.fill(avePrice);
 		} else {
 			avePrice = Math.exp(9d * ra.nextDouble());
@@ -46,9 +46,9 @@ public class Product {  // 产品
 		expePrice = new Expect(price, 1d);
 	}
 
-	double addedValue()  // （单位产品的）价值增值=生产时间*作业工人数(未定)*单位时间劳动价值/设备生产率
+	double addedValue(Society society)  // （单位产品的）价值增值=生产时间*作业工人数(未定)*单位时间劳动价值/设备生产率
 	{
-		return pro_time * workers_number * Society.wor.value / equ_productivity;
+		return pro_time * workers_number * society.wor.value / equ_productivity;
 	}
 
 	double c()  // 不变资本
@@ -57,37 +57,37 @@ public class Product {  // 产品
 				+ equ_price * equ_loss / equ_productivity;
 		/* 设备损耗 */}
 
-	double value()  // 单位产品的价值
+	double value(Society society)  // 单位产品的价值
 	{
 		return c()  // 不变资本c
-				+ addedValue();
+				+ addedValue(society);
 		/* v+m */}
 
-	double cost()  // 成本
+	double cost(Society society)  // 成本
 	{
 		return c()  // c
-				+ Society.wor.aveSalary * workers_number * pro_time / equ_productivity;
+				+ society.wor.aveSalary * workers_number * pro_time / equ_productivity;
 		/* v */}
 
-	double profit()  // 平均利润
+	double profit(Society society)  // 平均利润
 	{
-		return avePrice - cost();
+		return avePrice - cost(society);
 	}
 
-	double interestRate(double ra)  // 预期利率 激进程度
+	double interestRate(Society society, double ra)  // 预期利率 激进程度
 	{
-		double d1 = cost();  // 成本
+		double d1 = cost(society);  // 成本
 		return (expePrice.expect(ra, pro_time) - d1) / d1;
 	}
 
-	void countAveragePrice()  // 计算均价（依据产量加权平均）
+	void countAveragePrice(Society society)  // 计算均价（依据产量加权平均）
 	{
 		double d1 = 0d, d2 = 0d;
 		int i1;
 		Capitalist cap;
 
-		for (i1 = 0; i1 < Society.capn; i1++) {
-			cap = Society.cap[i1];
+		for (i1 = 0; i1 < society.capn; i1++) {
+			cap = society.cap[i1];
 			if (cap.pro_participant && cap.pro_id == id) {
 				d1 += cap.stocks;
 				d2 += cap.stocks * cap.price;
@@ -100,7 +100,7 @@ public class Product {  // 产品
 		expePrice = new Expect(price, 1d);
 	}
 
-	void print()  // 打印信息
+	void print(Society society)  // 打印信息
 	{
 		System.out.println(name);
 		System.out.println("可生产性：" + producible);
@@ -112,8 +112,8 @@ public class Product {  // 产品
 			System.out.println("原材料价格：" + rawMat_price);
 			System.out.println("生产时间：" + pro_time);
 			System.out.println("所需工人数：" + workers_number);
-			System.out.println("价值增值：" + addedValue());
-			System.out.println("价值：" + value());
+			System.out.println("价值增值：" + addedValue(society));
+			System.out.println("价值：" + value(society));
 		}
 	}
 

@@ -2,17 +2,21 @@ import java.util.Random;
 
 public class Society {  // 社会
 
-	static final int pron = 3;  // 产品种类数
-	static Product[] pro = new Product[pron];  // 产品
-	static final int capn = 10;  // 资本家个数
-	static Capitalist[] cap = new Capitalist[capn];  // 资本家
-	static Workers wor = new Workers();  // 工人
+	int pron = 3;  // 产品种类数
+	Product[] pro = new Product[pron];  // 产品
+	int capn = 10;  // 资本家个数
+	Capitalist[] cap = new Capitalist[capn];  // 资本家
+	Workers wor;  // 工人
 
-	static double aveInterestRates;  // 平均利率
+	double aveInterestRates;  // 平均利率
 
-	static Random ra;  // 随机数发生器
+	Random ra;  // 随机数发生器
 
-	public static void main(String args[]) {
+	public Society() {
+		this.wor = new Workers(this);
+	}
+
+	public void run() {
 		int i1, i2;
 
 		  //
@@ -31,17 +35,17 @@ public class Society {  // 社会
 		ra = new Random(3);  // 产品初始化
 		for (i1 = 0; i1 < pron; i1++) {
 			pro[i1] = new Product(i1, "产品" + (char) ('A' + i1));
-			pro[i1].randomSet(ra);
-			pro[i1].print();
+			pro[i1].randomSet(this, ra);
+			pro[i1].print(this);
 			System.out.println();
 		}
 
 		ra = new Random(16);  // 资本家初始化
 		for (i1 = 0; i1 < capn; i1++) {
 			cap[i1] = new Capitalist(i1);
-			cap[i1].randomSet(ra);
-			cap[i1].setPrice(ra);
-			cap[i1].print();
+			cap[i1].randomSet(this, ra);
+			cap[i1].setPrice(this, ra);
+			cap[i1].print(this);
 			System.out.println();
 		}
 
@@ -62,8 +66,8 @@ public class Society {  // 社会
 		wor.income.randomFill(ra, wor.money * 0.8d, wor.money * 1.2d);
 		wor.expeIncome = new Expect(wor.income, 1d);
 		wor.print();
-		wor.setNeed(ra);
-		wor.printNeed();
+		wor.setNeed(this, ra);
+		wor.printNeed(this);
 		System.out.println();
 
 		ra = new Random(5);
@@ -73,20 +77,20 @@ public class Society {  // 社会
 			System.out.print(cap[0].stocks + ",");
 			for (i2 = 0; i2 < capn; i2++) {
 				if (cap[i2].pro_participant) {
-					cap[i2].setPrice(ra);  // 工业资本家制定售价
-					cap[i2].handleProduces();
+					cap[i2].setPrice(this, ra);  // 工业资本家制定售价
+					cap[i2].handleProduces(this);
 				}
-				cap[i2].handleLoans();
-				cap[i2].invest(ra);
+				cap[i2].handleLoans(this);
+				cap[i2].invest(this, ra);
 			}   // 资本家投资
 			for (i2 = 0; i2 < pron; i2++)
-				pro[i2].countAveragePrice();  // 重算市场均价
+				pro[i2].countAveragePrice(this);  // 重算市场均价
 			  // System.out.print((float)cap[0].price+",");
 			  // System.out.print((float)wor.temNumber+",");
 			wor.countIncome();
 			  // System.out.print((float)wor.aveSalary+",");
 			  // System.out.print((float)wor.money+",");
-			wor.buy();  // 工人消费
+			wor.buy(this);  // 工人消费
 			  // System.out.println();
 		}
 

@@ -1,2 +1,2 @@
 # capitalist-society-simulation
-Run `src/Society.java`.
+Run `src/Main.java`.

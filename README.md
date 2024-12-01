@@ -1,2 +1,2 @@
 # capitalist-society-simulation
-Simulation of capitalist society.
+Run `src/Society.java`.

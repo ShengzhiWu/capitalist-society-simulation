@@ -120,7 +120,7 @@ public class Capitalist {  // 资本家
 				d4, d5, d6,
 				cost,
 				c;
-		int i1, i2;
+		int i1;
 		Product pro1 = null, pro2;
 
 		if (pro_participant) {
@@ -135,7 +135,6 @@ public class Capitalist {  // 资本家
 		d2 = Math.pow(d6 + 1d, 1d / Loan.loanTerm) - 1d;  // 借贷单位时间的利率
 														  // （因为过于激进的利率预期可能会<-1，所以可能会得到NaN）
 		d3 = Double.NEGATIVE_INFINITY;
-		i2 = 0;
 		for (i1 = 0; i1 < Society.pron; i1++)  // 寻找最佳投机产品，计算投机单位时间的利率
 		{
 			pro2 = Society.pro[i1];
@@ -146,7 +145,6 @@ public class Capitalist {  // 资本家
 				d5 = (pro2.expePrice.expect(d4, 1) - d5) / d5;
 				if (d5 > d3) {
 					d3 = d5;
-					i2 = i1;
 				}
 			}
 		}

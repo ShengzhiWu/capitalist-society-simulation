@@ -1,14 +1,14 @@
 
-public class Expect {// 预期
+public class Expect {  // 预期
 
-	static double tx1 = 300d, tx2 = 80, tx3 = 30, tx4 = 8, // 分析基准时间尺度
-			tv1 = 1000d, tv2 = 200d, tv3 = 20d, tv4 = 4d;// 分析基准时间尺度
+	static double tx1 = 300d, tx2 = 80, tx3 = 30, tx4 = 8,   // 分析基准时间尺度
+			tv1 = 1000d, tv2 = 200d, tv3 = 20d, tv4 = 4d;  // 分析基准时间尺度
 
-	double x1, x2, x3, x4, // 近期平均值
-			v1, v2, v3, v4;// 各个时间尺度下线性回归得到的增长率
+	double x1, x2, x3, x4,   // 近期平均值
+			v1, v2, v3, v4;  // 各个时间尺度下线性回归得到的增长率
 
-	Expect(Data data, double tk)// 基于以往的离散数据，给出对未来形势的预期
-								// 以往数据 时间尺度系数（对于变化平稳的领域的数据，应对更长时间的数据进行分析，取较大的值）
+	Expect(Data data, double tk)  // 基于以往的离散数据，给出对未来形势的预期
+								  // 以往数据 时间尺度系数（对于变化平稳的领域的数据，应对更长时间的数据进行分析，取较大的值）
 	{
 		int txi1, txi2, txi3, txi4, tvi1, tvi2, tvi3, tvi4;
 		int i1, i2;
@@ -55,22 +55,22 @@ public class Expect {// 预期
 		d1 = 0d;
 		for (i2 = 0; i2 < i1; i2++)
 			d1 += data.get(i2);
-		x1 = d1 / i1;// 近期平均值
+		x1 = d1 / i1;  // 近期平均值
 		i1 = Math.min(data.length, txi2);
 		d1 = 0d;
 		for (i2 = 0; i2 < i1; i2++)
 			d1 += data.get(i2);
-		x2 = d1 / i1;// 近期平均值
+		x2 = d1 / i1;  // 近期平均值
 		i1 = Math.min(data.length, txi3);
 		d1 = 0d;
 		for (i2 = 0; i2 < i1; i2++)
 			d1 += data.get(i2);
-		x3 = d1 / i1;// 近期平均值
+		x3 = d1 / i1;  // 近期平均值
 		i1 = Math.min(data.length, txi4);
 		d1 = 0d;
 		for (i2 = 0; i2 < i1; i2++)
 			d1 += data.get(i2);
-		x4 = d1 / i1;// 近期平均值
+		x4 = d1 / i1;  // 近期平均值
 
 		if (data.length < tvi1)
 			v1 = 0d;
@@ -90,7 +90,7 @@ public class Expect {// 预期
 			v4 = v(data, tvi4);
 	}
 
-	double expect(double ra, int time)// 预期 激进程度（即对短期内信息的信任程度）（0~1）
+	double expect(double ra, int time)  // 预期 激进程度（即对短期内信息的信任程度）（0~1）
 	{
 		double d1 = 1d - ra,
 				a1 = d1 * d1 * d1,
@@ -104,7 +104,7 @@ public class Expect {// 预期
 		return (int) (d + 0.5d);
 	}
 
-	static double v(Data data, int l)// 使用最小二乘法求斜率 数据 求斜率部分的长度
+	static double v(Data data, int l)  // 使用最小二乘法求斜率 数据 求斜率部分的长度
 	{
 		double d1 = 0d, d2 = 0d, d3 = 0d, d4 = 0d, d5;
 		double x;
@@ -117,14 +117,14 @@ public class Expect {// 预期
 			d4 += i1 * x;
 		}
 		d5 = 1d / l;
-		d1 *= d5;// <t>
-		d2 *= d5;// <x>
-		d3 *= d5;// <tt>
-		d4 *= d5;// <tx>
+		d1 *= d5;  // <t>
+		d2 *= d5;  // <x>
+		d3 *= d5;  // <tt>
+		d4 *= d5;  // <tx>
 		return -(d4 - d1 * d2) / (d3 - d1 * d1);
 	}
 
-	static double k(Data data1, Data data2, int l)// 使用最小二乘法求斜率 数据（自变量） 数据（因变量） 求斜率部分的长度
+	static double k(Data data1, Data data2, int l)  // 使用最小二乘法求斜率 数据（自变量） 数据（因变量） 求斜率部分的长度
 	{
 		double d1 = 0d, d2 = 0d, d3 = 0d, d4 = 0d, d5;
 		double x, y;
@@ -138,10 +138,10 @@ public class Expect {// 预期
 			d4 += x * y;
 		}
 		d5 = 1d / l;
-		d1 *= d5;// <x>
-		d2 *= d5;// <y>
-		d3 *= d5;// <xx>
-		d4 *= d5;// <xy>
+		d1 *= d5;  // <x>
+		d2 *= d5;  // <y>
+		d3 *= d5;  // <xx>
+		d4 *= d5;  // <xy>
 		return (d4 - d1 * d2) / (d3 - d1 * d1);
 	}
 }

@@ -1,33 +1,33 @@
 import java.util.Random;
 
-public class Product {// 产品
+public class Product {  // 产品
 
-	int id;// 编号
-	String name;// 名称
-	boolean producible;// 可生产性
-	double avePrice;// 平均价格
+	int id;  // 编号
+	String name;  // 名称
+	boolean producible;  // 可生产性
+	double avePrice;  // 平均价格
 	Data price;
-	Expect expePrice;// 价格预期
+	Expect expePrice;  // 价格预期
 
-	// 设备
-	double equ_price;// 设备价格
-	int equ_productivity;// 设备生产率
-	double equ_loss;// (单次生产的)设备损耗
-	// 原材料
-	double rawMat_price;// （单位产品的）原材料价格
+	  // 设备
+	double equ_price;  // 设备价格
+	int equ_productivity;  // 设备生产率
+	double equ_loss;  // (单次生产的)设备损耗
+	  // 原材料
+	double rawMat_price;  // （单位产品的）原材料价格
 
-	// 价值
-	int pro_time;// 生产时间
-	double workers_number;// 一台设备作业工人数
+	  // 价值
+	int pro_time;  // 生产时间
+	double workers_number;  // 一台设备作业工人数
 
-	Product(int i1, String s1)// 构造器
+	Product(int i1, String s1)  // 构造器
 	{
 		id = i1;
 		name = s1;
 		price = new Data();
 	}
 
-	void randomSet(Random ra)// 随机初始化
+	void randomSet(Random ra)  // 随机初始化
 	{
 		producible = ra.nextFloat() < 0.8f;
 		if (producible) {
@@ -46,41 +46,41 @@ public class Product {// 产品
 		expePrice = new Expect(price, 1d);
 	}
 
-	double addedValue()// （单位产品的）价值增值=生产时间*作业工人数(未定)*单位时间劳动价值/设备生产率
+	double addedValue()  // （单位产品的）价值增值=生产时间*作业工人数(未定)*单位时间劳动价值/设备生产率
 	{
 		return pro_time * workers_number * Society.wor.value / equ_productivity;
 	}
 
-	double c()// 不变资本
+	double c()  // 不变资本
 	{
-		return rawMat_price// 原材料
+		return rawMat_price  // 原材料
 				+ equ_price * equ_loss / equ_productivity;
 		/* 设备损耗 */}
 
-	double value()// 单位产品的价值
+	double value()  // 单位产品的价值
 	{
-		return c()// 不变资本c
+		return c()  // 不变资本c
 				+ addedValue();
 		/* v+m */}
 
-	double cost()// 成本
+	double cost()  // 成本
 	{
-		return c()// c
+		return c()  // c
 				+ Society.wor.aveSalary * workers_number * pro_time / equ_productivity;
 		/* v */}
 
-	double profit()// 平均利润
+	double profit()  // 平均利润
 	{
 		return avePrice - cost();
 	}
 
-	double interestRate(double ra)// 预期利率 激进程度
+	double interestRate(double ra)  // 预期利率 激进程度
 	{
-		double d1 = cost();// 成本
+		double d1 = cost();  // 成本
 		return (expePrice.expect(ra, pro_time) - d1) / d1;
 	}
 
-	void countAveragePrice()// 计算均价（依据产量加权平均）
+	void countAveragePrice()  // 计算均价（依据产量加权平均）
 	{
 		double d1 = 0d, d2 = 0d;
 		int i1;
@@ -100,7 +100,7 @@ public class Product {// 产品
 		expePrice = new Expect(price, 1d);
 	}
 
-	void print()// 打印信息
+	void print()  // 打印信息
 	{
 		System.out.println(name);
 		System.out.println("可生产性：" + producible);

@@ -2,18 +2,18 @@ import java.util.Random;
 
 public class Society {  // 社会
 
-	int pron = 3;  // 产品种类数
-	Product[] pro = new Product[pron];  // 产品
-	int capn = 10;  // 资本家个数
-	Capitalist[] cap = new Capitalist[capn];  // 资本家
-	Workers wor;  // 工人
+	int productKinds = 3;  // 产品种类数
+	Product[] products = new Product[productKinds];  // 产品
+	int capitalistNumbrt = 10;  // 资本家个数
+	Capitalist[] cap = new Capitalist[capitalistNumbrt];  // 资本家
+	Workers workers;  // 工人
 
 	double aveInterestRates;  // 平均利率
 
 	Random ra;  // 随机数发生器
 
 	public Society() {
-		this.wor = new Workers(this);
+		this.workers = new Workers(this);
 	}
 
 	public void run(int steps) {
@@ -33,15 +33,15 @@ public class Society {  // 社会
 		 */
 
 		ra = new Random(3);  // 产品初始化
-		for (i1 = 0; i1 < pron; i1++) {
-			pro[i1] = new Product(i1, "产品" + (char) ('A' + i1));
-			pro[i1].initialize(this, ra);
-			pro[i1].print(this);
+		for (i1 = 0; i1 < productKinds; i1++) {
+			products[i1] = new Product(i1, "产品" + (char) ('A' + i1));
+			products[i1].initialize(this, ra);
+			products[i1].print(this);
 			System.out.println();
 		}
 
 		ra = new Random(16);  // 资本家初始化
-		for (i1 = 0; i1 < capn; i1++) {
+		for (i1 = 0; i1 < capitalistNumbrt; i1++) {
 			cap[i1] = new Capitalist(i1);
 			cap[i1].initialize(this, ra);
 			cap[i1].setPrice(this, ra);
@@ -50,24 +50,24 @@ public class Society {  // 社会
 		}
 
 		ra = new Random(16);  // 工人整体初始化 16
-		wor.number = 0d;
-		wor.money = 0d;
-		for (i1 = 0; i1 < capn; i1++) {
+		workers.number = 0d;
+		workers.money = 0d;
+		for (i1 = 0; i1 < capitalistNumbrt; i1++) {
 			if (!cap[i1].pro_participant)
 				continue;
-			wor.number += cap[i1].avaEqu_number * pro[cap[i1].pro_id].workers_number;
-			wor.money += cap[i1].avaEqu_number * pro[cap[i1].pro_id].equ_productivity
-					* (pro[cap[i1].pro_id].avePrice - pro[cap[i1].pro_id].c()) / pro[cap[i1].pro_id].pro_time;
+			workers.number += cap[i1].avaEqu_number * products[cap[i1].pro_id].workers_number;
+			workers.money += cap[i1].avaEqu_number * products[cap[i1].pro_id].equ_productivity
+					* (products[cap[i1].pro_id].avePrice - products[cap[i1].pro_id].c()) / products[cap[i1].pro_id].pro_time;
 		}
-		wor.aveSalary = wor.money / wor.number * 0.7d;
-		wor.number *= 2d;  // 工人盈余
-		wor.avaNumber = wor.number;
-		wor.minSalary = wor.value * 0.3d;
-		wor.income.randomFill(ra, wor.money * 0.8d, wor.money * 1.2d);
-		wor.expeIncome = new Expect(wor.income, 1d);
-		wor.print();
-		wor.setNeed(this, ra);
-		wor.printNeed(this);
+		workers.aveSalary = workers.money / workers.number * 0.7d;
+		workers.number *= 2d;  // 工人盈余
+		workers.avaNumber = workers.number;
+		workers.minSalary = workers.value * 0.3d;
+		workers.income.randomFill(ra, workers.money * 0.8d, workers.money * 1.2d);
+		workers.expeIncome = new Expect(workers.income, 1d);
+		workers.print();
+		workers.setNeed(this, ra);
+		workers.printNeed(this);
 		System.out.println();
 
 		ra = new Random(5);
@@ -75,22 +75,22 @@ public class Society {  // 社会
 										  // System.out.print((float)cap[0].capital+",");
 										  // System.out.print((float)cap[0].avaEqu_number+",");
 			System.out.print(cap[0].stocks + ",");
-			for (i2 = 0; i2 < capn; i2++) {
+			for (i2 = 0; i2 < capitalistNumbrt; i2++) {
 				if (cap[i2].pro_participant) {
 					cap[i2].setPrice(this, ra);  // 工业资本家制定售价
-					cap[i2].handleProduces(this);
+					cap[i2].updateProduces(this);  // 结束已到时间的生产，产品收入库存，回收设备，计算设备损耗，归还劳动力，支付工人工资
 				}
-				cap[i2].handleLoans(this);
-				cap[i2].invest(this, ra);
+				cap[i2].updateLoans(this);  // 更新借贷
+				cap[i2].invest(this, ra);  // 投资
 			}   // 资本家投资
-			for (i2 = 0; i2 < pron; i2++)
-				pro[i2].countAveragePrice(this);  // 重算市场均价
+			for (i2 = 0; i2 < productKinds; i2++)
+				products[i2].countAveragePrice(this);  // 重算市场均价
 			  // System.out.print((float)cap[0].price+",");
 			  // System.out.print((float)wor.temNumber+",");
-			wor.countIncome();
+			workers.countIncome();
 			  // System.out.print((float)wor.aveSalary+",");
 			  // System.out.print((float)wor.money+",");
-			wor.buy(this);  // 工人消费
+			workers.buy(this);  // 工人消费
 			  // System.out.println();
 		}
 

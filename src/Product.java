@@ -48,7 +48,7 @@ public class Product {  // 产品
 
 	double addedValue(Society society)  // （单位产品的）价值增值=生产时间*作业工人数(未定)*单位时间劳动价值/设备生产率
 	{
-		return pro_time * workers_number * society.wor.value / equ_productivity;
+		return pro_time * workers_number * society.workers.value / equ_productivity;
 	}
 
 	double c()  // 不变资本
@@ -66,7 +66,7 @@ public class Product {  // 产品
 	double cost(Society society)  // 成本
 	{
 		return c()  // c
-				+ society.wor.aveSalary * workers_number * pro_time / equ_productivity;
+				+ society.workers.aveSalary * workers_number * pro_time / equ_productivity;
 		/* v */}
 
 	double profit(Society society)  // 平均利润
@@ -86,7 +86,7 @@ public class Product {  // 产品
 		int i1;
 		Capitalist cap;
 
-		for (i1 = 0; i1 < society.capn; i1++) {
+		for (i1 = 0; i1 < society.capitalistNumbrt; i1++) {
 			cap = society.cap[i1];
 			if (cap.pro_participant && cap.pro_id == id) {
 				d1 += cap.stocks;

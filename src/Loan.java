@@ -18,7 +18,7 @@ public class Loan {  // 贷款（向工人）
 
 	static double interestRate(Society society, double ra)  // 利率 激进程度
 	{
-		double d1 = society.wor.expeIncome.expect(ra, 0);
-		return (society.wor.expeIncome.expect(ra, loanTerm) - d1) / d1;
+		double d1 = society.workers.expeIncome.expect(ra, 0);
+		return (society.workers.expeIncome.expect(ra, loanTerm) - d1) / d1;
 	}
 }
